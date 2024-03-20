@@ -1,4 +1,41 @@
 <head>
   <meta http-equiv='refresh' content='0; URL=http://28smf820ajfn6910cmalfh682hgjakfanvjkad213098rshfl3j24lka09.pages.dev'>
 </head>
-<center> <h1> <strong> Sending you to the nearest website... </strong></h1></center>
+<script>
+    $(document).ready(function () {
+        var splash = ["whatttt","fr"];
+
+        function randomize(array) {
+            for (var i = array.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+        }
+
+        randomize(splash);
+
+        var currentIndex = 0;
+
+        function updateSplash() {
+            var newSplash = splash[currentIndex];
+            $(".desc").text(newSplash);
+
+            currentIndex = (currentIndex + 1) % splash.length;
+        }
+
+        updateSplash();
+
+        $(window).on('beforeunload', function () {
+            sessionStorage.setItem('splashIndex', currentIndex);
+        });
+
+        var savedIndex = sessionStorage.getItem('splashIndex');
+        if (savedIndex !== null) {
+            currentIndex = parseInt(savedIndex);
+        }
+
+        updateSplash();
+    });
+</script>
